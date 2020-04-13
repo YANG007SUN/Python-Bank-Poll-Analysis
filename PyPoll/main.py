@@ -7,7 +7,8 @@ import csv
 filepath = pathlib.Path("../Resources/election_data.csv")
 
 
-# ====================================== open file and calculate statistics =======================================
+# =========================================== open file and calculate statistics ============================================
+
 with open(filepath, "r") as csvfile:
     election_data = csv.reader(csvfile, delimiter = ",")
 
@@ -39,18 +40,52 @@ with open(filepath, "r") as csvfile:
         my_dict[candidate_list[i]] = my_dict[candidate_list[i]]+1
        
     
+    # winner name
     winner = max(my_dict, key = my_dict.get)
 
-    
+# =================================================== print out results ====================================================
+
+print(
+f"""Election Results
+============================
+Total Votes: {total_votes}
+============================
+{unique_candidate[0]}: {round((my_dict[unique_candidate[0]]/total_votes)*100,3)}% ({my_dict[unique_candidate[0]]})
+{unique_candidate[1]}: {round((my_dict[unique_candidate[1]]/total_votes)*100,3)}% ({my_dict[unique_candidate[1]]})
+{unique_candidate[2]}: {round((my_dict[unique_candidate[2]]/total_votes)*100,3)}% ({my_dict[unique_candidate[2]]})
+{unique_candidate[3]}: {round((my_dict[unique_candidate[3]]/total_votes)*100,3)}% ({my_dict[unique_candidate[3]]})
+============================
+Winner: {winner}
+============================
+
+""")
 
 
+
+# ==================================================== export results =====================================================
+
+analysis_text = open("Poll_Analysis.txt","w")
+analysis_text.write(
+f"""Election Results
+============================
+Total Votes: {total_votes}
+============================
+{unique_candidate[0]}: {round((my_dict[unique_candidate[0]]/total_votes)*100,3)}% ({my_dict[unique_candidate[0]]})
+{unique_candidate[1]}: {round((my_dict[unique_candidate[1]]/total_votes)*100,3)}% ({my_dict[unique_candidate[1]]})
+{unique_candidate[2]}: {round((my_dict[unique_candidate[2]]/total_votes)*100,3)}% ({my_dict[unique_candidate[2]]})
+{unique_candidate[3]}: {round((my_dict[unique_candidate[3]]/total_votes)*100,3)}% ({my_dict[unique_candidate[3]]})
+============================
+Winner: {winner}
+============================
+
+""")
 
 
         
 
 
 
-    print(winner)
+    
 
 
 

@@ -8,7 +8,7 @@ import statistics as stat
 # read the data
 budget_filepath = pathlib.Path("../Resources/budget_data.csv")
 
-# ================================================ open the file and calculate analysis ================================================
+# ======================================== open file and calculate statistics =========================================
 with open(budget_filepath, "r") as budgetfile:
     budget_data = csv.reader(budgetfile, delimiter = ",")
 
@@ -60,6 +60,6 @@ print(f"Greatest Increase in Profits: {greatest_increase_profit_period} ${greate
 print(f"Greatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}")
 
 
-# ================================================ create and text file and export with analysis ================================================
+# =================================== create and text file and export with analysis ====================================
 analysis_text = open("Financial_Analysis.txt","w")
 analysis_text.write(f"Financial Analysis\n==============================\nTotal Months: {total_months}\nNet Total Amount: ${net_total}\nAveage Change: ${average_change}\nGreatest Increase in Profits: {greatest_increase_profit_period} ${greatest_increase_value}\nGreatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}")

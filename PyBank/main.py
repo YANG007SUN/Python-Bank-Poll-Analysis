@@ -37,9 +37,11 @@ with open(budget_filepath, "r") as budgetfile:
     for i in range(len(profit_loss)):
         if i >0:
             pl_list.append(int(profit_loss[i])-int(profit_loss[i-1]))
+            if i+1 == len(profit_loss):
+                # average of the change
+                average_change = round(stat.mean(pl_list),3)
 
-    # average periodic profit change
-    average_change = round(stat.mean(pl_list),3)
+    
 
     # create a dict to hold period and periodic profit change
     my_dict = {period:change for period, change in zip(period_month, pl_list)}
@@ -51,15 +53,29 @@ with open(budget_filepath, "r") as budgetfile:
     greatest_decrease_value = my_dict[greatest_decrease_profit_period]
 
 # ================================================ print final analysis ================================================
-print("Financial Analysis")
-print("==============================")
-print(f"Total Months: {total_months}")
-print(f"Net Total Amount: ${net_total}")
-print(f"Aveage Change: ${average_change}")
-print(f"Greatest Increase in Profits: {greatest_increase_profit_period} ${greatest_increase_value}")
-print(f"Greatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}")
+print(
+f"""Financial Analysis
+==============================
+Total Months: {total_months}
+Net Total Amount: ${net_total}
+Aveage Change: ${average_change}
+Greatest Increase in Profits: {greatest_increase_profit_period} ${greatest_increase_value}
+Greatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}
+
+"""
+)
 
 
 # =================================== create and text file and export with analysis ====================================
 analysis_text = open("Financial_Analysis.txt","w")
-analysis_text.write(f"Financial Analysis\n==============================\nTotal Months: {total_months}\nNet Total Amount: ${net_total}\nAveage Change: ${average_change}\nGreatest Increase in Profits: {greatest_increase_profit_period} ${greatest_increase_value}\nGreatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}")
+analysis_text.write(
+f"""Financial Analysis
+==============================
+Total Months: {total_months}
+Net Total Amount: ${net_total}
+Aveage Change: ${average_change}
+Greatest Increase in Profits: {greatest_increase_profit_period} ${greatest_increase_value}
+Greatest Decrease in Profits: {greatest_decrease_profit_period} -${greatest_decrease_value*-1}
+
+"""
+)
